@@ -1,9 +1,18 @@
-def call(String message, String webhookUrl) {
-    def payload = [text: message]
-    def jsonPayload = new groovy.json.JsonBuilder(payload).toString()
+def call(String message, String webhookUrl, String channel = null) {
+    def payload = [
+        text: message
+    ]
+    if (channel) {
+        payload.channel = channel
+    }
 
-    httpRequest httpMode: 'POST',
-                contentType: 'APPLICATION_JSON',
-                requestBody: jsonPayload,
-                url: webhookUrl
+    def jsonPayload = groovy.json.JsonOutput.toJson(payload)
+
+    httpRequest(
+        httpMode: 'POST',
+        contentType: 'APPLICATION_JSON',
+        requestBody: jsonPayload,
+        url: webhookUrl,
+        validResponseCodes: '200'
+    )
 }
