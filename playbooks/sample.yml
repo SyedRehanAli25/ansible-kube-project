@@ -1,0 +1,8 @@
+- name: Sample Ansible Playbook
+  hosts: all
+  become: yes
+  tasks:
+    - name: Ensure NGINX is installed
+      ansible.builtin.package:
+        name: nginx
+        state: present
