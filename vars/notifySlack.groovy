@@ -1,6 +1,7 @@
+// vars/notifySlack.groovy
 def call(String message, String webhookUrl) {
     sh """
-        curl -X POST -H 'Content-type: application/json' \
-        --data '{"text": "${message}"}' ${webhookUrl}
+    curl -X POST -H 'Content-type: application/json' \
+    --data '{"text": "${message}"}' ${webhookUrl}
     """
 }
